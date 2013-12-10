@@ -1,0 +1,81 @@
+---
+layout: default
+---
+
+<h1>Just some tests with _data in Jekyll.</h1>
+
+<p>Feel free to fork with your experiments.</p>
+
+<hr>
+
+<h3>Basic setup: just render me some data!</h3>
+
+<p>Note the {% raw %}{% if %}{% endraw %} structure to only show users below 45 years old.</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Hobbies</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for user in site.data.users %}
+    {% if user.age < 45 %}
+    <tr>
+      <td>
+        {{ user.firstname }}
+        {{ user.lastname }}
+      </td>
+      <td>
+        {{ user.age }}
+      </td>
+      <td>
+        {{ user.hobbys }}
+      </td>
+    </tr>
+    {% endif %}
+  {% endfor %}
+</tbody>
+</table>
+
+<hr>
+
+<h3>More basic setup.</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Manufacturer</th>
+      <th>Model</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for car in site.data.cars %}
+    <tr>
+      <td>
+        {{ car.manufacturer }}
+      </td>
+      <td>
+        {{ car.model }}
+      </td>
+    </tr>
+  {% endfor %}
+</tbody>
+</table>
+
+<hr>
+
+<h3>Reading from an object with multiple levels:</h3>
+
+<p>{{ site.data.invoices.date }}</p>
+
+<p>{{ site.data.invoices.comments }}</p>
+
+<!-- How to split lines? -->
+<p>
+  {{ site.data.invoices.bill-to.given }} {{ site.data.invoices.bill-to.family }}<br>
+  {{ site.data.invoices.bill-to.address.lines }}<br>
+  {{ site.data.invoices.bill-to.address.city }} {{ site.data.invoices.bill-to.address.state }} {{ site.data.invoices.bill-to.address.postal }}
+</p>
